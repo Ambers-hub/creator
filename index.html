@@ -16,75 +16,77 @@ box-sizing:border-box;
 
 body{
 font-family:'Inter',sans-serif;
-min-height:100vh;
-overflow:hidden;
 background:#001f3f;
+color:white;
+overflow-x:hidden;
+}
+
+/* HERO SECTION */
+.hero{
+min-height:100vh;
 display:flex;
-justify-content:center;
 align-items:center;
-}
-
-/* Poster Layout */
-.poster{
-width:95%;
-max-width:1200px;
-height:600px;
-display:flex;
+justify-content:center;
+padding:40px 5%;
 position:relative;
-z-index:2;
-border-radius:20px;
-overflow:hidden;
-box-shadow:0 30px 60px rgba(0,0,0,0.5);
 }
 
-.poster::before{
+.hero::before{
 content:"";
 position:absolute;
-right:-200px;
-top:-150px;
+right:-250px;
+top:-200px;
 width:900px;
 height:900px;
 background:linear-gradient(135deg,#003366,#007bff);
 transform:rotate(45deg);
-z-index:1;
+z-index:0;
 }
 
+.container{
+width:100%;
+max-width:1200px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+position:relative;
+z-index:2;
+gap:40px;
+}
+
+/* IMAGE */
 .image-section{
 flex:1;
 display:flex;
-align-items:flex-end;
 justify-content:center;
-z-index:2;
+align-items:flex-end;
 animation:slideLeft 1.5s ease;
 }
 
 .image-section img{
-height:90%;
+width:100%;
+max-width:450px;
 filter:drop-shadow(0 30px 40px rgba(0,0,0,0.6));
 }
 
 @keyframes slideLeft{
-from{transform:translateX(-200px);opacity:0;}
+from{transform:translateX(-150px);opacity:0;}
 to{transform:translateX(0);opacity:1;}
 }
 
+/* CONTENT */
 .content{
 flex:1;
-z-index:2;
-color:white;
-display:flex;
-flex-direction:column;
-justify-content:center;
-padding:40px;
+animation:fadeIn 1.5s ease;
 }
 
 h1{
 font-family:'Montserrat',sans-serif;
-font-size:48px;
+font-size:52px;
 font-weight:800;
 line-height:1.2;
 margin-bottom:20px;
-min-height:120px;
+min-height:130px;
 }
 
 .subtext{
@@ -101,7 +103,7 @@ transform:translateY(0);
 }
 
 .cta-btn{
-padding:15px 35px;
+padding:16px 40px;
 font-size:16px;
 font-weight:600;
 background:#FFD700;
@@ -118,7 +120,12 @@ transform:scale(1.08);
 background:white;
 }
 
-/* Modal Form */
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(30px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+/* MODAL */
 .modal{
 display:none;
 position:fixed;
@@ -139,6 +146,7 @@ border-radius:15px;
 width:90%;
 max-width:400px;
 animation:popup 0.4s ease;
+color:black;
 }
 
 @keyframes popup{
@@ -179,31 +187,43 @@ font-size:22px;
 cursor:pointer;
 }
 
+/* MOBILE RESPONSIVE */
 @media(max-width:900px){
-.poster{
+
+.container{
 flex-direction:column;
-height:auto;
 text-align:center;
 }
-.poster::before{
+
+.hero::before{
 display:none;
 }
-.image-section img{
-height:300px;
-}
+
 h1{
-font-size:32px;
+font-size:34px;
+min-height:auto;
 }
+
+.image-section img{
+max-width:320px;
 }
+
+.cta-btn{
+width:100%;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="poster">
+<section class="hero">
+<div class="container">
 
 <div class="image-section">
-<img src="Gemini_Generated_Image_joxgy3joxgy3joxg-removebg-preview.png" alt="Developer">
+<img src="Untitled-1_copy-removebg-preview.png" alt="Developer">
 </div>
 
 <div class="content">
@@ -215,8 +235,9 @@ Premium • Responsive • Business-Focused Websites Within Your Budget
 </div>
 
 </div>
+</section>
 
-<!-- Popup Form -->
+<!-- MODAL -->
 <div class="modal" id="contactModal">
 <span class="close" onclick="closeForm()">✖</span>
 <div class="modal-content">
@@ -237,14 +258,14 @@ function typing(){
 if(i < text.length){
 document.getElementById("typing").innerHTML += text.charAt(i);
 i++;
-setTimeout(typing,40);
+setTimeout(typing,35);
 }else{
 document.getElementById("subText").classList.add("show");
 }
 }
 typing();
 
-/* Open Close Modal */
+/* Modal */
 function openForm(){
 document.getElementById("contactModal").style.display="flex";
 }
@@ -252,7 +273,7 @@ function closeForm(){
 document.getElementById("contactModal").style.display="none";
 }
 
-/* Send Form Data to WhatsApp */
+/* WhatsApp */
 function sendToWhatsApp(){
 let name = document.getElementById("name").value;
 let phone = document.getElementById("phone").value;
@@ -272,4 +293,3 @@ window.open(whatsappURL, "_blank");
 
 </body>
 </html>
-
